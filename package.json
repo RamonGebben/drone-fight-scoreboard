@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A very simple score board",
   "scripts": {
-    "start": "webpack-dev-server --content-base build/"
+    "start": "webpack-dev-server --content-base build/",
+    "build": "gulp; TARGET=build webpack",
+    "deploy":"npm run build; git add build && git commit -m 'deploy with npm'; git subtree push --prefix build origin gh-pages"
   },
   "dependencies": {
     "react": "0.14.7",
