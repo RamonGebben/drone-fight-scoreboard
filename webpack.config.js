@@ -15,14 +15,6 @@ var loaders = [
       ],
       "plugins": []
     }
-  },
-  {
-    "test": /\.css?$/,
-    "loader": "style!css"
-  },
-  {
-    "test": /\.less?$/,
-    "loader": "style!css!less"
   }
 ];
 
@@ -37,7 +29,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.tpl.html'),
-      inject: 'body',
       filename: 'index.html'
     })
   ],
