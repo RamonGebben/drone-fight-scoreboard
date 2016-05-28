@@ -9,13 +9,11 @@ const startColors = getRandomColors(2);
 const startState = {
   fighters: [
     {
-      name: Faker.Internet.userName(),
       score: defaultStartingScore,
       inTheGame: true,
       color: startColors[0],
     },
     {
-      name: Faker.Internet.userName(),
       score: defaultStartingScore,
       inTheGame: true,
       color: startColors[1],
@@ -23,6 +21,7 @@ const startState = {
   ],
   gameOver: false,
   winner: null,
+  showRules: false,
 };
 
 
@@ -67,7 +66,6 @@ class ScoreBoard extends Component {
 
   onAddFighter() {
     const newFighter = {
-      name: Faker.Internet.userName(),
       score: defaultStartingScore,
       inTheGame: true,
       color: getRandomColor(),
@@ -89,13 +87,11 @@ class ScoreBoard extends Component {
     this.setState({
       fighters: [
         {
-          name: this.state.fighters[0].name,
           score: defaultStartingScore,
           inTheGame: true,
           color: this.state.fighters[0].color,
         },
         {
-          name: this.state.fighters[1].name,
           score: defaultStartingScore,
           inTheGame: true,
           color: this.state.fighters[1].color,
@@ -106,9 +102,14 @@ class ScoreBoard extends Component {
     });
   }
 
+  toggleRules() {
+    this.setState({ showRules: !this.state.showRules });
+  }
+
   render() {
     return (
       <div className="score-board-container">
+        <header />
         {!this.state.gameOver ? <div className="playing-field">
           {this.state.fighters.map((fighter, i) => (
             <Fighter
@@ -117,7 +118,7 @@ class ScoreBoard extends Component {
               onScoreClick={this.onScoreClick.bind(this, i)}
             />
           ))}
-          <div className="button" onClick={this.onAddFighter.bind(this)}>Add fighter</div>
+          <div className="button" onClick={this.toggleRules.bind(this)}>Show rules</div>
         </div> :
         <div className="game-over">
           <h1>Game Over</h1>
@@ -126,6 +127,18 @@ class ScoreBoard extends Component {
           <div className="button" onClick={this.resetPlayingField.bind(this)}>Rematch</div>
         </div>
         }
+
+        {this.state.showRules &&
+        <div className="rules">
+          <h3>Rules of Drone Combat</h3>
+          <p>Standard drone combat consists of two drones fighting head to head in a pre-defined arena.  The objective is to knock the opponent’s drone to the floor while avoiding your own drone hitting the floor.</p>
+          <p>Combat starts with each drone ready-to-fly and idling in a designated landing zone or ring.  At the sound of the buzzer, each drone lifts into the air.</p>
+          <p>Each player begins with 3 points.  One point is deducted each time a player’s drone touches the floor. The first player to reach 0 points is declared the loser.</p>
+          <p>If combat results in both drones hitting the floor at the same time or within 3 seconds of each other, then both players loses a point.  However, a game-winning point or “kill” point can NOT be obtained if both drones hit the floor at the same time or within 3 seconds of each other (ie.  The winning drone must NOT hit the floor with 3 seconds of the losing drone hitting the floor for final kill point).</p>
+          <p>Each time a drone crashes, Pilots have 90 seconds to lift off again.  During this time they are permitted to enter the arena to make emergency repairs, replace batteries & parts or make adjustments to their drone.  Pilots have 90 seconds to get their drone flying or they are eliminated from the match.  During this time the healthy drone is allowed to land and rest. If for any reason a drone hits the floor outside of the ring upon landing or otherwise crashes or can’t lift-off again, it will lose a point as if it had crashed in combat.</p>
+          <p>Matches end at 5 minutes.  The drone with the highest score will be declared the winner.  If there is a tie, the winner will be determined by tennis ball firing squad or sudden death.</p>
+          <div className="button" onClick={this.toggleRules.bind(this)}>Close</div>
+        </div>}
       </div>
     );
   }

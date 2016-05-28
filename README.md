@@ -1,9 +1,9 @@
-# Drone fight score board
+# React starter template [![Build Status](https://travis-ci.org/RamonGebben/react-template.svg?branch=master)](https://travis-ci.org/Ositoozy/react-example-es2015)
 
-## Start
+```
+npm install
+npm run build
+npm start
+```
 
-`npm install`
-
-`npm start`
-
-Go to `localhost:8080`
+Check the app at http://localhost:8080

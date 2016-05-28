@@ -3,7 +3,6 @@ import React from 'react';
 export default function(props) {
   return (
     <div className="fighter">
-      <h2>{props.name}</h2>
       <div
         className="score"
         style={{ backgroundColor: `#${props.color}` }}
@@ -14,5 +13,5 @@ export default function(props) {
         </div>
       </div>
     </div>
-  )
+  );
 }

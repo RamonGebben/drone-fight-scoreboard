@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import ScoreBoard from './components/ScoreBoard.js';
 
-import './styles/index.less';
+import './stylesheets/main.css';
 
 function renderShell() {
   const shell = document.createElement('div');
